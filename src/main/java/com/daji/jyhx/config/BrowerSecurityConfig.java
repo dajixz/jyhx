@@ -6,10 +6,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 /**
  * @author 大稽
@@ -25,6 +32,20 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository(){
+        JdbcTokenRepositoryImpl tokenRepository =  new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+//        tokenRepository.setCreateTableOnStartup(true);
+        return tokenRepository;
+    }
+
+    @Autowired
     private AuthenticationSuccessHandler myAuthenticationSuccessHander;
 
     @Autowired
@@ -33,22 +54,32 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable();
+
         http.formLogin()                    //  定义当需要用户登录时候，转到的登录页面。
                 .loginPage("/login")
                 .loginProcessingUrl("/authentication/form")
                 .successHandler(myAuthenticationSuccessHander)
                 .failureHandler(myAuthenticationFailureHandler)
                 .and()
-                .authorizeRequests()// 定义哪些URL需要被保护、哪些不需要被保护
+             .rememberMe()
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(3600*10)
+                .userDetailsService(userDetailsService)
+                .and()
+             .authorizeRequests()// 定义哪些URL需要被保护、哪些不需要被保护
                 .antMatchers("/login",
                         "/static/**",
-                        "/js*",
+                        "/js/*",
                         "/css/*",
                         "/fonts/*",
                         "/images/*",
-                        "/lib/**").permitAll()
-                .anyRequest()               // 任何请求,登录后可以访问
-                .authenticated()
+                        "/lib/**",
+                        "/favicon.ico").permitAll()
+                .antMatchers("/*")
+                .authenticated()// 匹配的请求,登录后可以访问
+                .anyRequest()
+                .access("@rbacService.hasPermission(request,authentication)")//必须有相应权限才可以访问
+//                .authenticated()
                 .and()
                 .csrf().disable(); // 关闭csrf防护
     }

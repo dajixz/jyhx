@@ -27,8 +27,12 @@
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
-            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <div class="layui-input-block">
+                <input type="checkbox" name="remember-me">记住我
+            </div>
             <hr class="hr20" >
+            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <hr class="hr25" >
         </form>
     </div>
 
@@ -47,7 +51,7 @@
                       async:true,
                       success:function (res) {
                           console.log(res)
-                          // window.location.href="/"
+                          window.location.href="/"
                       }
                   })
                 return false;
