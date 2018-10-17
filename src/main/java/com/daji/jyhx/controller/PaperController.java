@@ -40,22 +40,6 @@ public class PaperController {
 
 
 
-    @GetMapping("/test")
-    public String test(){
-        String str = "1,2,3";
-        String[] strAry = str.split(",");
-        Integer[] intAry = new Integer[strAry.length];
-        for(int i=0;i<strAry.length;i++){
-            intAry[i]= Integer.parseInt(strAry[i].trim());
-        }
-        System.out.println(Arrays.toString(intAry));
-        System.out.println(Arrays.asList(intAry));
-
-        Integer[] i = {1,2,3};
-        System.out.println(Arrays.toString(i).substring(1, Arrays.toString(i).length()-1));
-        return "55";
-    }
-
     @PostMapping("/getQuestions")
     public List getQuestionsByPaperId(String paperId){
         return paperService.getQuestionsByPaperId(paperId);

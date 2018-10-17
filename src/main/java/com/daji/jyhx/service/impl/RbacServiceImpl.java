@@ -56,8 +56,6 @@ public class RbacServiceImpl implements RbacService {
                 }
             }
             for(String url:urls){
-                System.out.println(url);
-                System.out.println(request.getRequestURI());
                 if(antPathMatcher.match((url),request.getRequestURI())){
                     hasPermission = true;
                     break;

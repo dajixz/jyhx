@@ -38,9 +38,6 @@ public class MyUserDetailsServiceImpl implements UserDetailsService{
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         logger.info("用户的id: {}", username);
-        // TODO 根据用户名，查找到对应的密码，与权限
-
-        logger.info(passwordEncoder.encode("123456"));
         // 封装用户信息，并返回。参数分别是：用户名，密码，用户权限
         Teacher teacher = teacherRepository.findTeacherByTeacherId(username);
         String roleStr = "";
