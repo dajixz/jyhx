@@ -36,6 +36,10 @@ public class Teacher implements UserDetails{
     //教师邮箱
     private String teacherEmail;
 
+    private String teacherGradeId;
+
+    private String teacherClazzId;
+
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "teacher_role",joinColumns = {@JoinColumn(name = "teacher_id")},inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<Role> roles ;

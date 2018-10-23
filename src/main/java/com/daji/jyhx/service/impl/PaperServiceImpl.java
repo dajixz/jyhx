@@ -3,18 +3,14 @@ package com.daji.jyhx.service.impl;
 import com.daji.jyhx.entity.*;
 import com.daji.jyhx.repository.ObjectivequestionRepository;
 import com.daji.jyhx.repository.PaperRespository;
-import com.daji.jyhx.repository.QuestionRepository;
 import com.daji.jyhx.repository.SubjectivequestionRepository;
 import com.daji.jyhx.service.PaperService;
 import com.daji.jyhx.utils.ComparatorQuestion;
 import com.daji.jyhx.vo.PaperVo;
-import com.daji.jyhx.vo.QuestionVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigInteger;
 import java.util.*;
 
 /**

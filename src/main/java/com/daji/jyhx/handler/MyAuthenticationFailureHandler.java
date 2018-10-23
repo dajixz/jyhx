@@ -1,5 +1,6 @@
 package com.daji.jyhx.handler;
 
+import com.daji.jyhx.vo.ResponseVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.slf4j.Logger;
@@ -31,9 +32,11 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         logger.info("登录失败");
-
 //        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(e));
+        ResponseVo vo = new ResponseVo();
+        vo.setCode(500);
+        vo.setMsg("用户名或密码错误！");
+        response.getWriter().write(objectMapper.writeValueAsString(vo));
     }
 }

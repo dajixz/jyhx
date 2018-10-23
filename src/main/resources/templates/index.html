@@ -11,7 +11,8 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./css/font.css">
 	<link rel="stylesheet" href="./css/xadmin.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.cookie.js"></script>
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
 
@@ -35,7 +36,7 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a id="a" href="javascript:;">admin</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
               <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
@@ -59,7 +60,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="studentList">
+                        <a _href="/studentList">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>学生列表</cite>
                         </a>
@@ -239,9 +240,16 @@
     <!-- 中部结束 -->
     <!-- 底部开始 -->
     <div class="footer">
-        <div class="copyright">Copyright ©2017 x-admin v2.3 All Rights Reserved</div>  
+        <div class="copyright">Copyright ©2017 x-admin v2.3 All Rights Reserved</div>
     </div>
     <!-- 底部结束 -->
-
+    <script>
+        $(function () {
+          var res = $.cookie("current");
+          var info = $.parseJSON(res);
+          var name = info.teacherName;
+          $("#a").html(name)
+        })
+    </script>
 </body>
 </html>

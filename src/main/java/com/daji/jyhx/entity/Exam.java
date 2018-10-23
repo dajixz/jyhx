@@ -34,5 +34,6 @@ public class Exam {
     //考试最高总分
     private Double examTopScore;
 
+    private String examGradeId;
 
 }

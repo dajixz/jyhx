@@ -38,15 +38,18 @@ public class MyUserDetailsServiceImpl implements UserDetailsService{
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         logger.info("用户的id: {}", username);
-        // 封装用户信息，并返回。参数分别是：用户名，密码，用户权限
         Teacher teacher = teacherRepository.findTeacherByTeacherId(username);
         String roleStr = "";
-        for (Role role :teacher.getRoles()) {
-            roleStr += role.getRoleName()+",";
+        if(teacher!=null){
+            for (Role role :teacher.getRoles()) {
+                roleStr += role.getRoleName()+",";
+            }
+            List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(roleStr);
+            teacher.setAuthorities(grantedAuthorities);
+        }else{
+            throw new UsernameNotFoundException("用户名或密码错误！");
         }
 
-        List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(roleStr);
-        teacher.setAuthorities(grantedAuthorities);
         return teacher;
     }
 }

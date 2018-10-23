@@ -14,4 +14,5 @@ public interface PaperService {
     void addPaper(Paper paper);
     void editPaper(PaperVo paperVo) ;
     List getQuestionsByPaperId(String paperId);
+
 }

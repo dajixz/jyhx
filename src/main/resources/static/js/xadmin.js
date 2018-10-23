@@ -1,8 +1,7 @@
 
 $(function () {
     //加载弹出层
-    layui.use(['form','element'],
-    function() {
+    layui.use(['form','element'], function() {
         layer = layui.layer;
         element = layui.element;
     });
@@ -205,5 +204,3 @@ function x_admin_close(){
     var index = parent.layer.getFrameIndex(window.name);
     parent.layer.close(index);
 }
-
-

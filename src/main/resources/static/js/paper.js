@@ -1,5 +1,5 @@
-layui.use('laypage', function(){
-    layer = layui.layer;
+layui.use('layer', function(){
+    var layer = layui.layer;
     var app = new Vue({
         el: '#paperid',
         data: {
@@ -20,7 +20,19 @@ layui.use('laypage', function(){
                     },
                     async: true,
                     success: function (res) {
-                        app.paperList = res
+                        if(res.code ==403){
+                            layer.msg(res.msg,{
+                                time:2000,
+                                shade:0.3,
+                                end:function () {
+                                    parent.element.tabDelete("xbs_tab",examid)
+                                }
+                            })
+
+                        }else{
+                            app.paperList = res
+                        }
+
                     }
                 })
             }
@@ -28,7 +40,7 @@ layui.use('laypage', function(){
     })
 
 })
-function toPaperEdit(url,obj){
+function toPaperView(url,obj){
     var title = $(obj).attr("name");
     var paperId = $(obj).attr("data-id");
     // url=url+"?title="+title+"&paperId="+paperId;

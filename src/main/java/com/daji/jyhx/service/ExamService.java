@@ -10,5 +10,5 @@ import org.springframework.data.domain.Page;
 public interface ExamService {
 
     void addExam(Exam exam);
-    Page<Exam> getExamList(Integer page);
+    Page<Exam> getExamListByGradeId(Integer page,String gradeId);
 }

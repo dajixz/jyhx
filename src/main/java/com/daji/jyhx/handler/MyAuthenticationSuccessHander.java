@@ -1,5 +1,7 @@
 package com.daji.jyhx.handler;
 
+import com.daji.jyhx.entity.Teacher;
+import com.daji.jyhx.vo.ResponseVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +31,16 @@ public class MyAuthenticationSuccessHander implements AuthenticationSuccessHandl
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         logger.info("登录成功！");
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(authentication));
+        Teacher principal = (Teacher) authentication.getPrincipal();
+        Teacher teacher = new Teacher();
+        teacher.setTeacherId(principal.getTeacherId());
+        teacher.setTeacherName(principal.getTeacherName());
+        teacher.setTeacherClazzId(principal.getTeacherClazzId());
+        teacher.setTeacherGradeId(principal.getTeacherGradeId());
+        ResponseVo vo = new ResponseVo();
+        vo.setCode(200);
+        vo.setMsg("登录成功！");
+        vo.setData(teacher);
+        response.getWriter().write(objectMapper.writeValueAsString(vo));
     }
 }

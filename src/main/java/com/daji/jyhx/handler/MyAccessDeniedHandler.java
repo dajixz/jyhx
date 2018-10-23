@@ -1,5 +1,6 @@
 package com.daji.jyhx.handler;
 
+import com.daji.jyhx.vo.ResponseVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -23,9 +24,10 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
-
-//        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(e));
+        ResponseVo vo = new ResponseVo();
+        vo.setCode(403);
+        vo.setMsg("你没有访问的权限！");
+        response.getWriter().write(objectMapper.writeValueAsString(vo));
     }
 }

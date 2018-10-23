@@ -1,6 +1,7 @@
 package com.daji.jyhx.entity;
 
-import javax.naming.Name;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,6 +10,7 @@ import java.io.Serializable;
  * @date2018/8/917:54
  */
 @Embeddable
+@Data
 public class ScorePk implements Serializable {
 
 //    //得分所属试卷id 复合主键 外键

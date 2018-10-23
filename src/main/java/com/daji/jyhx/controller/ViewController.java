@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,6 @@ import java.util.List;
  * @date2018/8/919:18
  */
 @Controller()
-
 public class ViewController {
 
     @Autowired
@@ -76,6 +72,22 @@ public class ViewController {
         }
         return "paper-edit";
     }
+
+    @PostMapping("/paperCorrect")
+    public String getPaperCorrect(String title, String paperId, String subject, Model model) {
+        model.addAttribute("title", title+"-批改");
+        model.addAttribute("subject", subject);
+        model.addAttribute("paperId", paperId);
+        return "paper-correct";
+    }
+    @PostMapping("/paperEntry")
+    public String getPaperEntry(String title, String paperId, String subject, Model model) {
+        model.addAttribute("title", title);
+        model.addAttribute("subject", subject);
+        model.addAttribute("paperId", paperId);
+        return "paper-entry";
+    }
+
 
     @GetMapping("/subjectiveAdd")
     public String getSubjectiveAdd() {

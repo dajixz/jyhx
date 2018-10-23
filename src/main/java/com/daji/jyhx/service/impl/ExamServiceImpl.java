@@ -27,8 +27,8 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public Page<Exam> getExamList(Integer page) {
+    public Page<Exam> getExamListByGradeId(Integer page,String gradeId) {
         Pageable pageable =  PageRequest.of(page-1, 5, Sort.Direction.ASC, "examTime");
-        return examRepository.findAll(pageable);
+        return examRepository.findExamByExamGradeId(pageable, gradeId);
     }
 }

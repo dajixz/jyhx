@@ -31,7 +31,7 @@ public class ExamController {
     }
 
     @GetMapping("/getExamList")
-    public Page<Exam> getExamList(Integer page){
-        return examService.getExamList(page);
+    public Page<Exam> getExamList(Integer page,String gradeId){
+        return examService.getExamListByGradeId(page,gradeId);
     }
 }

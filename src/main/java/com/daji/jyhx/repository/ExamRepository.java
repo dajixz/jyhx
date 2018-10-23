@@ -1,6 +1,8 @@
 package com.daji.jyhx.repository;
 
 import com.daji.jyhx.entity.Exam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -9,5 +11,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @date2018/8/1322:56
  */
 public interface ExamRepository extends JpaRepository<Exam,String>,JpaSpecificationExecutor<Exam> {
-
+    Page<Exam> findExamByExamGradeId(Pageable pageable, String gradeId);
 }

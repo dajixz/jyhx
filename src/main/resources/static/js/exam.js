@@ -20,13 +20,16 @@ layui.use(['laydate','laypage'], function(){
         },
         methods:{
             getExamList:function (page) {
-                var page =page
+                var page = page
+                var info = $.parseJSON($.cookie("current"));
+                var gradeId = info.teacherGradeId
                 $.ajax({
                     type:'GET',
                     url:'/getExamList',
                     dataType:'json',
                     data:{
-                        page:page
+                        page:page,
+                        gradeId:gradeId
                     },
                     async:true,
                     success:function (res) {
@@ -59,7 +62,6 @@ function parent_add_tab(url,obj){
     var tab_li = $("li[lay-id="+id+"]",parent.document)
     if(tab_li.length==1){
         parent.element.tabChange('xbs_tab', id)
-
     }else {
         parent.element.tabAdd('xbs_tab', {
             title: title,

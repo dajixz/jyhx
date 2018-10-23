@@ -47,7 +47,6 @@ public class PaperController {
 
     @PostMapping("/editPaper")
     public String editPaper(PaperVo paperVo){
-        System.out.println(paperVo);
 //        try {
             paperService.editPaper(paperVo);
 //        }catch (Exception e){
@@ -55,4 +54,5 @@ public class PaperController {
 //        }
         return "";
     }
+
 }

@@ -18,8 +18,7 @@ layui.use(['layer', 'element', 'form'], function () {
                 layer.alert("ssssssssssssssssssssssssssssss")
             }
         })
-        //
-        // return false;
+        return false;
     })
 
 })
