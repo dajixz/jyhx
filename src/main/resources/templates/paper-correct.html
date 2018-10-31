@@ -13,27 +13,39 @@
     <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./js/jquery.cookie.js"></script>
     <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script type="text/javascript" src="./js/paper-correct.js"></script>
 </head>
 
 <body>
-<div id="app">
+<div id="paperId" hidden th:value="${paperId}"></div>
+<div id="correct">
     <div class="layui-card">
         <div class="layui-card-body">
-            <div type="text" style="text-align:center;">第一道大题</div>
+            <div type="text" style="text-align:center;">{{subjectiveQuestionContent}}</div>
         </div>
         <div class="layui-card-header">
-            <div style="text-align:center;">你在看什么</div>
+            <div style="text-align:center;">{{questionName}}&nbsp;&nbsp;{{questionScore}}</div>
         </div>
     </div>
-    <div class="layui-col-md6" style="border-right: 1px solid;border-bottom:1px solid ">
-        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540308878754&di=4da886f2dcf10fae42858f768a878284&imgtype=0&src=http%3A%2F%2Flive-cover.msstatic.com%2Fhuyalive%2F98057200-2686881316-11540067380453441536-4382227474-10057-A-0-1%2F20180904014447.jpg%3Fx-oss-process%3Dstyle%2Fw338_h190">
+    <div class="layui-container">
+        <form class="layui-form">
+            <div class="layui-col-md8" style="border-right: 1px solid;" v-if="answer != null">
+                {{answer.answerContent}}
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-block">
+                    <input id="score" class="layui-input" name="goalScore" value="" required lay-verify="required">
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-filter="put" lay-submit="">确定</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="layui-col-md6" style="border-bottom:1px solid">
-        ss
-    </div>
-
-
+    <div id="laypage" class="page"></div>
 </div>
 </body>
 </html>

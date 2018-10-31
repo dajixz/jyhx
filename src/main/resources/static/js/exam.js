@@ -25,7 +25,7 @@ layui.use(['laydate','laypage'], function(){
                 var gradeId = info.teacherGradeId
                 $.ajax({
                     type:'GET',
-                    url:'/getExamList',
+                    url:'/exam/getExamList',
                     dataType:'json',
                     data:{
                         page:page,

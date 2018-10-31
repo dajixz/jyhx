@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -18,7 +19,8 @@ import java.util.UUID;
  * @author 大稽
  * @date2018/8/1322:55
  */
-@RestController("/exam")
+@RestController
+@RequestMapping("/exam")
 public class ExamController {
 
     @Autowired

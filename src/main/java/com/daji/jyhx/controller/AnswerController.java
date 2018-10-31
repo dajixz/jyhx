@@ -3,6 +3,7 @@ package com.daji.jyhx.controller;
 import com.daji.jyhx.entity.Answer;
 import com.daji.jyhx.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,13 @@ public class AnswerController {
     private AnswerService answerService;
 
     @GetMapping("/getAnswers")
-    public Map<String,Object> getAnswerByPaperIdAndQuestionId(String paperId, Integer questionId){
-        return answerService.getAnswersByPaperIdAndQuestionId(paperId,questionId);
+    public Page<Answer> getAnswerByPaperIdAndQuestionId(String paperId, Integer questionId,Integer page){
+        return answerService.getAnswersByPaperIdAndQuestionId(paperId,questionId,page);
+    }
+
+    @GetMapping("getAnswerInfo")
+    public Map<String,String> getAnswerInfoByPaperIdAndQuestionId(String paperId, Integer questionId){
+        return answerService.getAnswerInfoByPaperIdAndQuestionId(paperId,questionId);
     }
 
 }
