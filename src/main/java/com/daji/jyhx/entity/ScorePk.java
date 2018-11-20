@@ -32,7 +32,7 @@ public class ScorePk implements Serializable {
     private String scorePaperId;
 
     @Column(length = 32)
-    private String scoreQuestionId;
+    private Integer scoreQuestionId;
 
     //得分对应学生id  复合主键 外键 一对一 一个得分对应一个学生
 //    @OneToOne

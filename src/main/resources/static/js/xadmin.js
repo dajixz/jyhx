@@ -1,11 +1,10 @@
 
-$(function () {
+$(function (res) {
     //加载弹出层
     layui.use(['form','element'], function() {
         layer = layui.layer;
         element = layui.element;
     });
-
     //触发事件
   var tab = {
         tabAdd: function(title,url,id){

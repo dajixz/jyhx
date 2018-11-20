@@ -1,47 +1,46 @@
 package com.daji.jyhx.service.impl;
 
-import com.daji.jyhx.entity.Answer;
 import com.daji.jyhx.entity.QuestionPk;
+import com.daji.jyhx.entity.Score;
+import com.daji.jyhx.entity.ScorePk;
 import com.daji.jyhx.entity.Subjectivequestion;
-import com.daji.jyhx.repository.AnswerRepository;
+import com.daji.jyhx.repository.ScoreRepository;
 import com.daji.jyhx.repository.SubjectivequestionRepository;
-import com.daji.jyhx.service.AnswerService;
+import com.daji.jyhx.service.ScoreService;
+import com.daji.jyhx.vo.ScoreVo;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author 大稽
- * @date2018/10/2318:30
+ * @date2018/11/115:08
  */
 @Service
-public class AnswerServiceImpl implements AnswerService{
+public class ScoreServiceImpl implements ScoreService {
 
     @Autowired
-    private AnswerRepository answerRepository;
+    private ScoreRepository scoreRepository;
 
     @Autowired
     private SubjectivequestionRepository subjectivequestionRepository;
 
     @Override
-    @Transactional
-    public Page<Answer> getAnswersByPaperIdAndQuestionId(String paperId, Integer questionId,Integer page) {
+    public Page<Score> getScoresByPaperIdAndQuestionId(String paperId, Integer questionId, Integer page) {
         Pageable pageable =  PageRequest.of(page-1, 1);
 //        List<Answer> answers = answerRepository.findAnswersByPaperIdAndQuestionId(paperId, questionId,Integer.valueOf(1),Integer.valueOf(1));
-        Page<Answer> answers = answerRepository.findAnswersByPaperIdAndQuestionId(paperId, questionId,pageable);
-        return answers;
+        Page<Score> scores = scoreRepository.findScoresByPaperIdAndQuestionId(paperId, questionId,pageable);
+        return scores;
     }
 
     @Override
-    public Map<String, String> getAnswerInfoByPaperIdAndQuestionId(String paperId, Integer questionId) {
+    public Map<String, String> getScoreInfoByPaperIdAndQuestionId(String paperId, Integer questionId) {
         Map<String,String> infoMap = new HashMap<>();
         QuestionPk questionPk = new QuestionPk();
         questionPk.setQuestionPaperId(paperId);
@@ -54,5 +53,10 @@ public class AnswerServiceImpl implements AnswerService{
         infoMap.put("questionName",questionName);
         infoMap.put("subjectiveQuestionContent",subjectiveQuestionContent);
         return infoMap;
+    }
+
+    @Override
+    public Integer updateScoreByScorePk(ScoreVo scoreVo) {
+        return scoreRepository.updateScoreByScorePk(scoreVo.getScorePaperId(),scoreVo.getScoreQuestionId(),scoreVo.getScoreStudentId(),scoreVo.getGoalScore(),scoreVo.getQuestionScore());
     }
 }

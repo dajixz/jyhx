@@ -9,12 +9,12 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="./css/font.css">
-	<link rel="stylesheet" href="./css/xadmin.css">
-    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="./js/jquery.cookie.js"></script>
-    <script src="./lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <link rel="stylesheet" href="/css/font.css">
+	<link rel="stylesheet" href="/css/xadmin.css">
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/js/xadmin.js"></script>
 
 </head>
 <body class="login-bg">
@@ -51,7 +51,7 @@
                       async:true,
                       success:function (res) {
                           if(res.code == 200){
-                              $.cookie("current",JSON.stringify(res.data));
+                              $.cookie("current",JSON.stringify(res.data),{path:'/'});
                               window.location.href="/"
                           }else if(res.code == 500){
                               layer.msg(res.msg)

@@ -8,13 +8,13 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="./css/font.css">
-    <link rel="stylesheet" href="./css/xadmin.css">
-    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="./js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/vue.js"></script>
-    <script type="text/javascript" src="./js/paper-correct.js"></script>
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/xadmin.css">
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <script type="text/javascript" src="/js/paper-correct.js"></script>
 </head>
 
 <body>
@@ -30,8 +30,9 @@
     </div>
     <div class="layui-container">
         <form class="layui-form">
-            <div class="layui-col-md8" style="border-right: 1px solid;" v-if="answer != null">
-                {{answer.answerContent}}
+            <div class="layui-col-md8">
+                <div  v-if="answer != null"> {{answer.scoreAnswerContent}}</div>
+                <div v-else>&nbsp;</div>
             </div>
             <div class="layui-col-md4">
                 <div class="layui-input-block">

@@ -61,10 +61,14 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
         http.headers().frameOptions().disable();
 
         http.formLogin()                    //  定义当需要用户登录时候，转到的登录页面。
-                .loginPage("/login")
+                .loginPage("/view/login")
                 .loginProcessingUrl("/authentication/form")
                 .successHandler(myAuthenticationSuccessHander)
                 .failureHandler(myAuthenticationFailureHandler)
+                .and()
+             .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/view/login")
                 .and()
              .rememberMe()
                 .tokenRepository(persistentTokenRepository())
@@ -72,7 +76,8 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
                 .userDetailsService(userDetailsService)
                 .and()
              .authorizeRequests()// 定义哪些URL需要被保护、哪些不需要被保护
-                .antMatchers("/login",
+                .antMatchers("/view/login",
+                        "/logout",
                         "/static/**",
                         "/js/*",
                         "/css/*",

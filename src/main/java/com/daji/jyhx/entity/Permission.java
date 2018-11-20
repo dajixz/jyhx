@@ -23,16 +23,17 @@ public class Permission {
 
     private String url;
 
+    private String resources;
 //    @ManyToMany
 //    @JoinTable(name = "role_permission",joinColumns = {@JoinColumn(name = "role_id")},inverseJoinColumns = {@JoinColumn(name = "permission_id")})
 //    private List<Role> roles;
-
     @Override
     public String toString() {
         return "Permission{" +
                 "permissionId=" + permissionId +
                 ", permissionName='" + permissionName + '\'' +
                 ", url='" + url + '\'' +
+                ", resources='" + resources + '\'' +
                 '}';
     }
 }

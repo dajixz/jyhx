@@ -38,11 +38,17 @@ public class Teacher implements UserDetails{
 
     private String teacherGradeId;
 
-    private String teacherClazzId;
+    private String teacherSchoolId;
 
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "teacher_role",joinColumns = {@JoinColumn(name = "teacher_id")},inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private List<Role> roles ;
+    private List<Role> roleList ;
+
+    @Transient
+    private int role;
+
+    @Transient
+    private int[] roles;
 
     @Transient
     private Collection<? extends GrantedAuthority> authorities;
@@ -55,7 +61,9 @@ public class Teacher implements UserDetails{
                 ", teacherTel='" + teacherTel + '\'' +
                 ", teacherPassword='" + teacherPassword + '\'' +
                 ", teacherEmail='" + teacherEmail + '\'' +
-                ", authorities=" + authorities +
+                ", teacherGradeId='" + teacherGradeId + '\'' +
+                ", teacherSchoolId='" + teacherSchoolId + '\'' +
+                ", role=" + role +
                 '}';
     }
 

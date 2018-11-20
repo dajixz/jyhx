@@ -35,8 +35,8 @@ public class MyAuthenticationSuccessHander implements AuthenticationSuccessHandl
         Teacher teacher = new Teacher();
         teacher.setTeacherId(principal.getTeacherId());
         teacher.setTeacherName(principal.getTeacherName());
-        teacher.setTeacherClazzId(principal.getTeacherClazzId());
         teacher.setTeacherGradeId(principal.getTeacherGradeId());
+        teacher.setTeacherSchoolId(principal.getTeacherSchoolId());
         ResponseVo vo = new ResponseVo();
         vo.setCode(200);
         vo.setMsg("登录成功！");

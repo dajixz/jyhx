@@ -23,21 +23,24 @@ public class Role  {
 
     private String roleName;
 
+    private String roleDescription;
 //    @ManyToMany
 //    @JoinTable(name = "teacher_role",joinColumns = {@JoinColumn(name = "teacher_id")},inverseJoinColumns = {@JoinColumn(name = "role_id")})
 //    private List<Teacher> teachers;
 
+    @Transient
+    private boolean flag;
+
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "role_permission",joinColumns = {@JoinColumn(name = "permission_id")},inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<Permission> permissions;
-
 
     @Override
     public String toString() {
         return "Role{" +
                 "roleId=" + roleId +
                 ", roleName='" + roleName + '\'' +
+                ", roleDescription='" + roleDescription + '\'' +
                 '}';
     }
-
 }

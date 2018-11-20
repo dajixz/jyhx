@@ -23,7 +23,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
     private ObjectMapper objectMapper;
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
         ResponseVo vo = new ResponseVo();
         vo.setCode(403);

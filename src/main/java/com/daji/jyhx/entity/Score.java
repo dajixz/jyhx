@@ -20,7 +20,11 @@ public class Score {
 
     //得分对应题目分值
     private Double scoreQuestionScore;
-
     //得分
     private Double scoreGoalScore;
+
+    private String scoreAnswerContent;
+
+    //true
+    private Integer state;
 }

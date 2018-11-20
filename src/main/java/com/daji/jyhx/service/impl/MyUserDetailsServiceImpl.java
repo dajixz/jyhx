@@ -31,9 +31,6 @@ public class MyUserDetailsServiceImpl implements UserDetailsService{
     @Autowired
     private TeacherRepository teacherRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -41,7 +38,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService{
         Teacher teacher = teacherRepository.findTeacherByTeacherId(username);
         String roleStr = "";
         if(teacher!=null){
-            for (Role role :teacher.getRoles()) {
+            for (Role role :teacher.getRoleList()) {
                 roleStr += role.getRoleName()+",";
             }
             List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(roleStr);

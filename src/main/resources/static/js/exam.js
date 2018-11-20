@@ -1,6 +1,7 @@
-layui.use(['laydate','laypage'], function(){
+layui.use(['layer','laydate','laypage'], function(){
     var laydate = layui.laydate;
     var laypage = layui.laypage;
+    var layer = layui.layer;
     //执行一个laydate实例
     laydate.render({
         elem: '#start' //指定元素
@@ -22,7 +23,10 @@ layui.use(['laydate','laypage'], function(){
             getExamList:function (page) {
                 var page = page
                 var info = $.parseJSON($.cookie("current"));
-                var gradeId = info.teacherGradeId
+                if(info == null){
+                    return;
+                }
+                var gradeId = info.teacherGradeId;
                 $.ajax({
                     type:'GET',
                     url:'/exam/getExamList',
@@ -33,6 +37,10 @@ layui.use(['laydate','laypage'], function(){
                     },
                     async:true,
                     success:function (res) {
+                        if(res.code==403){
+                            layer.msg(res.msg)
+                            return;
+                        }
                         for(var index in res.content){
                             res.content[index].examTime = res.content[index].examTime.substring(0,10)
                         }
