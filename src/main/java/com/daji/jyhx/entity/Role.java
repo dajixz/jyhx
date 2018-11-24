@@ -2,12 +2,12 @@ package com.daji.jyhx.entity;
 
 
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
+
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * @author 大稽
@@ -15,8 +15,9 @@ import java.util.Set;
  */
 @Entity
 @Data
-public class Role  {
+public class Role implements Serializable{
 
+    private static final long serialVersionUID = 5953489686174757750L;
     @Id
     @GeneratedValue
     private int roleId;
@@ -29,11 +30,14 @@ public class Role  {
 //    private List<Teacher> teachers;
 
     @Transient
+    private List<Integer> permissions;
+
+    @Transient
     private boolean flag;
 
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "role_permission",joinColumns = {@JoinColumn(name = "permission_id")},inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private List<Permission> permissions;
+    private List<Permission> permissionList;
 
     @Override
     public String toString() {

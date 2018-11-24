@@ -22,17 +22,16 @@
 <div id="correct">
     <div class="layui-card">
         <div class="layui-card-body">
-            <div type="text" style="text-align:center;">{{subjectiveQuestionContent}}</div>
+            <div v-if="answer != null" type="text" style="text-align:center;">{{answer.scoreInfo.subjectiveQuestionContent}}</div>
         </div>
         <div class="layui-card-header">
-            <div style="text-align:center;">{{questionName}}&nbsp;&nbsp;{{questionScore}}</div>
+            <div v-if="answer != null" style="text-align:center;">{{answer.scoreInfo.questionName}}&nbsp;&nbsp;{{answer.scoreInfo.questionScore}}</div>
         </div>
     </div>
     <div class="layui-container">
         <form class="layui-form">
             <div class="layui-col-md8">
                 <div  v-if="answer != null"> {{answer.scoreAnswerContent}}</div>
-                <div v-else>&nbsp;</div>
             </div>
             <div class="layui-col-md4">
                 <div class="layui-input-block">
@@ -46,7 +45,6 @@
             </div>
         </form>
     </div>
-    <div id="laypage" class="page"></div>
 </div>
 </body>
 </html>

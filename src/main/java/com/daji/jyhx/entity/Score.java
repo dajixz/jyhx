@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
+import java.util.Map;
 
 /**
  * @author 大稽
@@ -27,4 +29,7 @@ public class Score {
 
     //true
     private Integer state;
+
+    @Transient
+    private Map<String,String> scoreInfo;
 }

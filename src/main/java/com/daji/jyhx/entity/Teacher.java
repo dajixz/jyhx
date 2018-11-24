@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -18,8 +19,9 @@ import java.util.Set;
 //教师表
 @Entity
 @Data
-public class Teacher implements UserDetails{
+public class Teacher implements UserDetails,Serializable{
 
+    private static final long serialVersionUID = -4161506096071021721L;
     //教师id
     @Id
     private String teacherId;
@@ -40,9 +42,13 @@ public class Teacher implements UserDetails{
 
     private String teacherSchoolId;
 
+    private String teacherResources;
+
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "teacher_role",joinColumns = {@JoinColumn(name = "teacher_id")},inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<Role> roleList ;
+
+
 
     @Transient
     private int role;

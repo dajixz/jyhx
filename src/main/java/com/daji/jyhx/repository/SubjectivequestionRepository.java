@@ -24,4 +24,7 @@ public interface SubjectivequestionRepository extends JpaRepository<Subjectivequ
     List<BigInteger> getSubjectiveNumByPaperId(@Param("paperId")String paperId);
 
     Subjectivequestion findByQuestionPk(QuestionPk questionPk);
+
+    @Query(value = "select question_id from subjective_question where question_paper_id=:paperId",nativeQuery = true)
+    List<Integer> findSubjectiveQuestionIdByPaperId(@Param("paperId") String paperId);
 }

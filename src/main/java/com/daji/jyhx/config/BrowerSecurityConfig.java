@@ -75,6 +75,8 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
                 .tokenValiditySeconds(3600)
                 .userDetailsService(userDetailsService)
                 .and()
+//             .sessionManagement()
+//                .invalidSessionUrl("")
              .authorizeRequests()// 定义哪些URL需要被保护、哪些不需要被保护
                 .antMatchers("/view/login",
                         "/logout",
@@ -85,7 +87,7 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter{
                         "/images/*",
                         "/lib/**",
                         "/favicon.ico").permitAll()
-                .antMatchers("/*")
+                .antMatchers("/view/*","/*","/teacher/*")
                 .authenticated()// 匹配的请求,登录后可以访问
                 .anyRequest()
                 .access("@rbacService.hasPermission(request,authentication)")//必须有相应权限才可以访问

@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date2018/11/1915:01
  */
 public interface RoleRepository extends JpaRepository<Role,Integer> {
-
+    Role findRoleByRoleDescription(String roleDescription);
 }

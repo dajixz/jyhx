@@ -44,7 +44,7 @@ public class RbacServiceImpl implements RbacService {
             Teacher teacher = teacherRepository.findTeacherByTeacherId(username);
             List<Role> roles = teacher.getRoleList();
             for (Role role: roles) {
-                List<Permission> permissions = role.getPermissions();
+                List<Permission> permissions = role.getPermissionList();
                 for(Permission permission:permissions){
                     String url = permission.getUrl();
                     if(url.contains(",")){

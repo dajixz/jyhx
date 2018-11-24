@@ -4,6 +4,7 @@ import com.daji.jyhx.repository.PaperRespository;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -13,7 +14,9 @@ import java.util.Set;
  */
 @Entity
 @Data
-public class Permission {
+public class Permission implements Serializable{
+
+    private static final long serialVersionUID = 6743803456430503125L;
 
     @Id
     @GeneratedValue
@@ -24,6 +27,9 @@ public class Permission {
     private String url;
 
     private String resources;
+
+    @Transient
+    private boolean flag;
 //    @ManyToMany
 //    @JoinTable(name = "role_permission",joinColumns = {@JoinColumn(name = "role_id")},inverseJoinColumns = {@JoinColumn(name = "permission_id")})
 //    private List<Role> roles;

@@ -40,6 +40,22 @@ layui.use('layer', function(){
     })
 
 })
+function toSetView(url,obj) {
+    var title = $(obj).attr("name");
+    var paperId = $(obj).attr("data-id");
+    var subject = $(obj).attr("data-subject");
+    url=url+"?paperId="+paperId+"&subject="+subject;
+    layer.open({
+        type: 2,
+        area: [($(window).width() * 0.9) + 'px',($(window).height() - 50) + 'px'],
+        fix: false, //不固定
+        maxmin: true,
+        shadeClose: true,
+        shade: 0.4,
+        title: title,
+        content: url
+    });
+}
 function toPaperView(url,obj){
     var title = $(obj).attr("name");
     var paperId = $(obj).attr("data-id");

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <title>欢迎页面-X-admin2.0</title>
@@ -11,7 +10,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -20,64 +19,40 @@
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
 <div class="x-body">
-    <form class="layui-form">
-        <input name="teacherId" th:value="${teacher.teacherId}" hidden>
-        <input name="teacherSchoolId" th:value="${teacher.teacherSchoolId}" hidden>
-        <input name="teacherPassword" th:value="${teacher.teacherPassword}" hidden>
+    <form action="" method="post" class="layui-form layui-form-pane">
+        <input name="roleId" th:value="${role.roleId}" hidden>
         <div class="layui-form-item">
-            <label for="teacherName" class="layui-form-label">
-                <span class="x-red">*</span>姓名
+            <label for="roleName" class="layui-form-label">
+               角色名
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="teacherName" name="teacherName" required="" th:value="${teacher.teacherName}"
-                       lay-verify="teacherName"
+                <input type="text" id="roleName" name="roleName" th:value="${role.roleName}" required=""
+                       lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label for="teacherTel" class="layui-form-label">
-                <span class="x-red">*</span>手机号
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="teacherTel" name="teacherTel" required="" th:value="${teacher.teacherTel}"
-                       lay-verify="phone"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="teacherEmail" class="layui-form-label">
-                <span class="x-red">*</span>邮箱
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="teacherEmail" name="teacherEmail" required="" th:value="${teacher.teacherEmail}"
-                       lay-verify="email"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="teacherGradeId" class="layui-form-label">
-                <span class="x-red">*</span>年级ID
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="teacherGradeId" name="teacherGradeId" required=""
-                       th:value="${teacher.teacherGradeId}"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">*</span>角色</label>
-            <div class="layui-input-block" th:each="role:${roles}">
-                <input type="checkbox" name="roles[]" th:value="${role.roleId}" lay-skin="primary" th:title="${role.roleDescription}" th:checked="${role.flag}">
-            </div>
-        </div>
-        <div class="layui-form-item">
+        <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">
+                拥有权限
             </label>
-            <button class="layui-btn" lay-filter="add" lay-submit="">
-                增加
-            </button>
+            <div class="layui-input-block" th:each="permission:${permissions}">
+                <input name="permissions[]" lay-skin="primary" type="checkbox" th:checked="${permission.isFlag()}"
+                       th:title="${permission.getPermissionName()}" th:value="${permission.getPermissionId()}">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                描述
+            </label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" id="desc" name="roleDescription" class="layui-textarea" th:text="${role.roleDescription}"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
         </div>
     </form>
 </div>
@@ -104,13 +79,12 @@
 
         //监听提交
         form.on('submit(add)', function (data) {
-            console.log(data);
-            var teacher = data.field;
+            var role = data.field;
             $.ajax({
                 type: 'PUT',
-                url: '/admin/updateTeacher',
+                url: '/role/updateRole',
                 dataType: 'json',
-                data: teacher,
+                data: role,
                 async: true,
                 success: function (res) {
                     if(res.code == 200){
@@ -126,13 +100,6 @@
                     }
                 }
             })
-            //发异步，把数据提交给php
-            // layer.alert("增加成功", {icon: 6}, function () {
-            //     // 获得frame索引
-            //     var index = parent.layer.getFrameIndex(window.name);
-            //     //关闭当前frame
-            //     parent.layer.close(index);
-            // });
             return false;
         });
 

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
     <!--<script type="text/javascript" src="/js/xadmin.js"></script>-->
     <script type="text/javascript" src="/js/paper-edit.js"></script>
@@ -39,7 +40,7 @@
     </ul>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a id="a" href="javascript:;">admin</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
                 <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
@@ -363,4 +364,13 @@
     </form>
 </div>
 </body>
+<script>
+    $(function () {
+        var res = $.cookie("current");
+        var info = $.parseJSON(res);
+        var name = info.teacherName;
+        $("#a").html(name)
+
+    })
+</script>
 </html>

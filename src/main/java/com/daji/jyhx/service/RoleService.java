@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface RoleService {
     List<Role> getRoles();
+    Role getRoleByRoleId(Integer roleId);
+    Role updateRole(Role role);
 }

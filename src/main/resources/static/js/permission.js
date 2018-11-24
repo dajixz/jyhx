@@ -17,8 +17,13 @@ layui.use(['layer','form'], function () {
                     dataType: 'json',
                     async: true,
                     success: function (res) {
-                        console.log(res)
-                        app.permissionList = res;
+                        if(res.code == 403){
+                            layer.msg(res.msg)
+                        }
+                        if(res.code ==200){
+                            app.permissionList = res;
+                        }
+
                     }
                 })
             }

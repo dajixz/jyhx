@@ -2,6 +2,7 @@ package com.daji.jyhx.service;
 
 
 import com.daji.jyhx.entity.Teacher;
+import com.daji.jyhx.vo.SetVo;
 import io.swagger.models.auth.In;
 import org.springframework.data.domain.Page;
 
@@ -24,4 +25,7 @@ public interface TeacherService {
 
     List<Teacher> saveBathTeachers(List<Teacher> teachers,String teacherSchoolId);
 
+    List<Teacher> findTeachersByTeacherGradeIdAndSubject(String teacherGradeId, String subject);
+
+    void setTeachersToCorrect(SetVo setVo);
 }

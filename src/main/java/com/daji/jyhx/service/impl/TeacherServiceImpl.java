@@ -5,6 +5,7 @@ import com.daji.jyhx.entity.Teacher;
 import com.daji.jyhx.repository.RoleRepository;
 import com.daji.jyhx.repository.TeacherRepository;
 import com.daji.jyhx.service.TeacherService;
+import com.daji.jyhx.vo.SetVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 
 /**
  * @author 大稽
@@ -95,5 +96,34 @@ public class TeacherServiceImpl implements TeacherService {
             teacher.setTeacherPassword(passwordEncoder.encode("123456"));
         }
         return teacherRepository.saveAll(teachers);
+    }
+
+    @Override
+    @Transactional
+    public List<Teacher> findTeachersByTeacherGradeIdAndSubject(String teacherGradeId, String subject) {
+        Role role = roleRepository.findRoleByRoleDescription(subject);
+        Integer roleId = role.getRoleId();
+        List<Teacher> teacherList = teacherRepository.findTeachersByTeacherGradeIdAndRoleId(teacherGradeId, roleId);
+        return teacherList;
+    }
+
+    @Override
+    @Transactional
+    public void setTeachersToCorrect(SetVo setVo) {
+        String paperId = setVo.getPaperId();
+        Map<String, List<String>> questions = setVo.getQuestions();
+        Iterator<String> iterator = questions.keySet().iterator();
+        while(iterator.hasNext()){
+            String teacherId = iterator.next();
+            List<String> questionIds = questions.get(teacherId);
+            String str =":";
+            for(String questionId:questionIds){
+                if(questionId ==null)continue;
+                str +=questionId+",";
+            }
+            String resources = paperId+str;
+            System.out.println(resources);
+            teacherRepository.setTeacherToCorrect(resources, teacherId);
+        }
     }
 }

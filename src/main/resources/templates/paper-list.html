@@ -82,7 +82,7 @@
                 <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
-                <a title="设置" onclick="" href="javascript:;">
+                <a title="设置" :name="paper.paperName" :data-id="paper.paperId" :data-subject="paper.paperSubject" onclick="toSetView('/view/paperCorrectSet',this)" href="javascript:;">
                     <i class="layui-icon">&#xe614;</i>
                 </a>
             </td>

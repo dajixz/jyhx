@@ -38,8 +38,6 @@ public class PaperController {
         return paperList;
     }
 
-
-
     @PostMapping("/getQuestions")
     public List getQuestionsByPaperId(String paperId){
         return paperService.getQuestionsByPaperId(paperId);

@@ -98,4 +98,10 @@ public class ViewController {
         return "paper-add";
     }
 
+    @GetMapping("/paperCorrectSet")
+    public String setCorrectView(String paperId, String subject,Model model){
+        model.addAttribute("subject", subject);
+        model.addAttribute("paperId", paperId);
+        return "paper-correct-set";
+    }
 }

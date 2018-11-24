@@ -4,6 +4,7 @@ import com.daji.jyhx.entity.Score;
 import com.daji.jyhx.vo.ScoreVo;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,7 +12,10 @@ import java.util.Map;
  * @date2018/11/115:00
  */
 public interface ScoreService {
-    Page<Score> getScoresByPaperIdAndQuestionId(String paperId, Integer questionId, Integer page);
+    Score getScoreByPaperIdAndQuestionIds(String paperId, String questionIds);
+
     Map<String, String> getScoreInfoByPaperIdAndQuestionId(String paperId, Integer questionId);
     Integer updateScoreByScorePk(ScoreVo scoreVo);
+    List<Integer> getSubjectiveQuestionIdByPaperId(String paperId);
+
 }

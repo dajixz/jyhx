@@ -30,4 +30,5 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
         vo.setMsg("你没有访问的权限！");
         response.getWriter().write(objectMapper.writeValueAsString(vo));
     }
+
 }
